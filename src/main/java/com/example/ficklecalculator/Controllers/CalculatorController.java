@@ -1,5 +1,6 @@
-package com.example.ficklecalculator;
+package com.example.ficklecalculator.Controllers;
 
+import com.example.ficklecalculator.Services.CalculatorService;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 

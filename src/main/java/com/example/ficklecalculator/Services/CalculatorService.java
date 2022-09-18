@@ -1,4 +1,4 @@
-package com.example.ficklecalculator;
+package com.example.ficklecalculator.Services;
 
 import org.springframework.stereotype.Service;
 
