@@ -9,19 +9,19 @@ public class CalculatorService {
         return "Добро пожаловать в калькулятор";
     }
 
-    public float plus(float num1, float num2){
+    public Float plus(float num1, float num2){
         return num1 + num2;
     }
 
-    public float minus(float num1, float num2){
+    public Float minus(float num1, float num2){
         return num1 - num2;
     }
 
-    public float multiply(float num1, float num2){
+    public Float multiply(float num1, float num2){
         return num1 * num2;
     }
 
-    public float divide(float num1, float num2){
+    public Float divide(float num1, float num2){
         return num1 / num2;
     }
 }

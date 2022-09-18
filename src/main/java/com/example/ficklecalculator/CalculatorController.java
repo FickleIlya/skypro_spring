@@ -19,35 +19,35 @@ public class CalculatorController {
     }
 
 
-    @GetMapping("")
+    @GetMapping
     public String hello(){
         return calculatorService.hello();
     }
 
     @GetMapping("/plus")
-    public String plus(@RequestParam("num1") float num1, @RequestParam("num2") float num2){
-        float result = calculatorService.plus(num1, num2);
+    public String plus(@RequestParam Float num1, @RequestParam Float num2){
+        Float result = calculatorService.plus(num1, num2);
         return num1 + " + " + num2 + " = " + result;
     }
 
     @GetMapping("/minus")
-    public String minus(@RequestParam("num1") float num1, @RequestParam("num2") float num2){
-        float result = calculatorService.minus(num1, num2);
+    public String minus(@RequestParam Float num1, @RequestParam Float num2){
+        Float result = calculatorService.minus(num1, num2);
         return num1 + " - " + num2 + " = " + result;
     }
 
     @GetMapping("/multiply")
-    public String multiply(@RequestParam("num1") float num1, @RequestParam("num2") float num2){
-        float result = calculatorService.multiply(num1, num2);
+    public String multiply(@RequestParam Float num1, @RequestParam Float num2){
+        Float result = calculatorService.multiply(num1, num2);
         return num1 + " * " + num2 + " = " + result;
     }
 
     @GetMapping("/divide")
-    public String divide(@RequestParam("num1") float num1, @RequestParam("num2") float num2){
+    public String divide(@RequestParam("num1") Float num1, @RequestParam("num2") Float num2){
         if (num2 == 0){
             return "На ноль делить нельзя";
         }
-        float result = calculatorService.divide(num1, num2);
+        Float result = calculatorService.divide(num1, num2);
         return num1 + " / " + num2 + " = " + result;
     }
 }
