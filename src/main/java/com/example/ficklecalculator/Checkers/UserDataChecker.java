@@ -14,10 +14,10 @@ public class UserDataChecker {
         return true;
     }
     public static void check(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException {
-        if (!login.matches("^[a-zA-Z0-9_]+$") || login.length() > 20) {
+        if (!login.matches("^[a-zA-Z0-9_]+$") && login.length() > 20) {
             throw new WrongLoginException("The length of the login cannot exceed 20 characters");
         }
-        if ( password.matches("^[a-zA-Z0-9_]+$") || password.length() < 20 || !password.equals(confirmPassword)) {
+        if ( !password.matches("^[a-zA-Z0-9_]+$") && password.length() < 20 && !password.equals(confirmPassword)) {
             throw new WrongPasswordException("The length of the login cannot be less 20 characters or password and confirm password not equal");
         }
     }
