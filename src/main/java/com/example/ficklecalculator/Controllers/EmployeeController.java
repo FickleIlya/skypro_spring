@@ -1,10 +1,8 @@
 package com.example.ficklecalculator.Controllers;
 
 import com.example.ficklecalculator.Services.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.google.gson.Gson;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employee")
@@ -17,12 +15,12 @@ public class EmployeeController {
 
     @GetMapping("/all")
     public String allEmployee(){
-        return employeeService.allEmployees();
+        return new Gson().toJson(employeeService.allEmployees());
     }
 
     @GetMapping("/add")
-    public String addEmployee(@RequestParam String firstName,@RequestParam String lastName){
-        return employeeService.addEmployee(firstName, lastName);
+    public String addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Integer department, @RequestParam Float salary){
+        return new Gson().toJson(employeeService.addEmployee(firstName, lastName, department, salary));
     }
 
     @GetMapping("/remove")
@@ -32,7 +30,7 @@ public class EmployeeController {
 
     @GetMapping("/find")
     public String findEmployee(@RequestParam String firstName,@RequestParam String lastName){
-        return employeeService.findEmployee(firstName, lastName);
+        return new Gson().toJson(employeeService.findEmployee(firstName, lastName));
     }
 
 }

@@ -6,6 +6,9 @@ public class Employee {
     private final String firstName;
     private final String lastName;
 
+    private int department;
+    private float salary;
+
     public String getFirstName() {
         return firstName;
     }
@@ -14,9 +17,17 @@ public class Employee {
         return lastName;
     }
 
-    public Employee(String firstName, String lastName){
+    public float getSalary() {return salary;}
+    public int getDepartment() {return department;}
+
+    public void setSalary(float salary) {this.salary = salary;}
+    public void setDepartment(int department) {this.department = department;}
+
+    public Employee(String firstName, String lastName, int department, float salary){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.department = department;
+        this.salary = salary;
     }
 
     @Override

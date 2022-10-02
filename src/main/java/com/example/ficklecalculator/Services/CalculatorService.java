@@ -1,27 +1,13 @@
 package com.example.ficklecalculator.Services;
 
-import org.springframework.stereotype.Service;
+public interface CalculatorService {
+    String hello();
 
-@Service
-public class CalculatorService {
+    Float plus(float num1, float num2);
 
-    public String hello(){
-        return "Добро пожаловать в калькулятор";
-    }
+    Float minus(float num1, float num2);
 
-    public Float plus(float num1, float num2){
-        return num1 + num2;
-    }
+    Float multiply(float num1, float num2);
 
-    public Float minus(float num1, float num2){
-        return num1 - num2;
-    }
-
-    public Float multiply(float num1, float num2){
-        return num1 * num2;
-    }
-
-    public Float divide(float num1, float num2){
-        return num1 / num2;
-    }
+    Float divide(float num1, float num2);
 }
