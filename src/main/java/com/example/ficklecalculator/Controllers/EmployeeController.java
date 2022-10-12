@@ -1,7 +1,9 @@
 package com.example.ficklecalculator.Controllers;
 
+import com.example.ficklecalculator.Checkers.UserDataChecker;
 import com.example.ficklecalculator.Services.EmployeeService;
 import com.google.gson.Gson;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,17 +22,20 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public String addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam Integer department, @RequestParam Float salary){
-        return new Gson().toJson(employeeService.addEmployee(firstName, lastName, department, salary));
+        UserDataChecker.checkIsAlpha(firstName, lastName);
+        return new Gson().toJson(employeeService.addEmployee(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName), department, salary));
     }
 
     @GetMapping("/remove")
     public String removeEmployee(@RequestParam String firstName,@RequestParam String lastName){
-        return employeeService.removeEmployee(firstName, lastName);
+        UserDataChecker.checkIsAlpha(firstName, lastName);
+        return employeeService.removeEmployee(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName));
     }
 
     @GetMapping("/find")
     public String findEmployee(@RequestParam String firstName,@RequestParam String lastName){
-        return new Gson().toJson(employeeService.findEmployee(firstName, lastName));
+        UserDataChecker.checkIsAlpha(firstName, lastName);
+        return new Gson().toJson(employeeService.findEmployee(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName)));
     }
 
 }

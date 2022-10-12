@@ -4,6 +4,7 @@ import com.example.ficklecalculator.Employee.Employee;
 import com.example.ficklecalculator.Exceptions.EmployeeAlreadyAddedException;
 import com.example.ficklecalculator.Exceptions.EmployeeNotFoundException;
 import com.example.ficklecalculator.Services.EmployeeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,7 +19,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     @Override
     public Employee addEmployee(String firstName, String lastName, int department, float salary){
-
         Optional<Employee> employee = employees.stream()
                 .filter(e -> e.getFirstName().equals(firstName) && e.getLastName().equals(lastName))
                 .findFirst();

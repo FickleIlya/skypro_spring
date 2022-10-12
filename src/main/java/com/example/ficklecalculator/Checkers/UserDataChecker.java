@@ -1,7 +1,9 @@
 package com.example.ficklecalculator.Checkers;
 
+import com.example.ficklecalculator.Exceptions.ResourceNotFoundException;
 import com.example.ficklecalculator.Exceptions.WrongLoginException;
 import com.example.ficklecalculator.Exceptions.WrongPasswordException;
+import org.apache.commons.lang3.StringUtils;
 
 public class UserDataChecker {
 
@@ -19,6 +21,12 @@ public class UserDataChecker {
         }
         if ( !password.matches("^[a-zA-Z0-9_]+$") || password.length() < 20 || !password.equals(confirmPassword)) {
             throw new WrongPasswordException("The length of the login cannot be less 20 characters or password and confirm password not equal");
+        }
+    }
+
+    public static void checkIsAlpha(String firstName, String lastName){
+        if (!StringUtils.isAlpha(firstName) || !StringUtils.isAlpha(lastName)){
+            throw new ResourceNotFoundException();
         }
     }
 }
