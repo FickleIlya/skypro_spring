@@ -4,14 +4,13 @@ import com.example.ficklecalculator.Employee.Employee;
 import com.example.ficklecalculator.Exceptions.EmployeeAlreadyAddedException;
 import com.example.ficklecalculator.Exceptions.EmployeeNotFoundException;
 import com.example.ficklecalculator.Services.EmployeeService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    List<Employee> employees = new ArrayList<>(); // change to list
+    List<Employee> employees = new ArrayList<>();
 
     @Override
     public List<Employee> allEmployees(){
