@@ -2,7 +2,6 @@ package com.example.ficklecalculator.Controllers;
 
 import com.example.ficklecalculator.Services.CartService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +22,8 @@ public class CartController {
     }
 
     @GetMapping("/add")
-    public JsonNode addToCart(@RequestParam List<String> itemIds) throws JsonProcessingException {
+    public void addToCart(@RequestParam List<String> itemIds) {
         cartService.addToCart(itemIds);
-        String result = "{\"data\" : \"added\"}";
-        return new ObjectMapper().readTree(result);
     }
 
     @GetMapping("/get")

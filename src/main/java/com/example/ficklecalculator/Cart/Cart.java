@@ -1,30 +1,34 @@
 package com.example.ficklecalculator.Cart;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Repository
-@Scope("prototype")
+@SessionScope
 public class Cart {
-    private Map<String, Long> cartItems;
+    private final Map<String, Long> cartItems;
 
     public Map<String, Long> getCartItems() {
         return cartItems;
     }
 
-    public void setCartItems(List<String> itemIds) {
-
-        this.cartItems = listToMapWithCountKeys(itemIds);
+    public void addToCart(List<String> itemIds) {
+        Map<String, Long> newItems = listToMapWithCountKeys(itemIds);
+        newItems.forEach((key, value) -> cartItems.merge(key, value, Long::sum));
     }
 
     private static <K>  Map<K, Long> listToMapWithCountKeys(List<K> list){
 
-        return (Map<K, Long>) list.stream().collect(
+        return list.stream().collect(
                 Collectors.groupingBy(s -> s, Collectors.counting()));
+    }
+
+    public Cart() {
+        cartItems = new HashMap<>();
     }
 }
