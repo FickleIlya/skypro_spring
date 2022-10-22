@@ -45,9 +45,6 @@ public class CalculatorController {
 
     @GetMapping("/divide")
     public String divide(@RequestParam Float num1, @RequestParam Float num2){
-        if (num2 == 0){
-            return "На ноль делить нельзя";
-        }
         Float result = calculatorService.divide(num1, num2);
         return num1 + " / " + num2 + " = " + result;
     }

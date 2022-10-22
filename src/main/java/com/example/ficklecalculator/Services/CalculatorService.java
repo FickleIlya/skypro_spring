@@ -9,5 +9,5 @@ public interface CalculatorService {
 
     Float multiply(float num1, float num2);
 
-    Float divide(float num1, float num2);
+    Float divide(float num1, float num2) throws IllegalArgumentException;
 }

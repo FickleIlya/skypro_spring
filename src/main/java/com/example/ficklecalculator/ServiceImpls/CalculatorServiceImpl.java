@@ -27,7 +27,10 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     @Override
-    public Float divide(float num1, float num2){
+    public Float divide(float num1, float num2) throws IllegalArgumentException{
+        if (num2 == 0){
+            throw new IllegalArgumentException("Cannot divide by zero");
+        }
         return num1 / num2;
     }
 }
