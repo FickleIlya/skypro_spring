@@ -3,7 +3,6 @@ package com.example.ficklecalculator.department.services;
 import com.example.ficklecalculator.Employee.Employee;
 import com.example.ficklecalculator.Exceptions.EmployeeNotFoundException;
 import com.example.ficklecalculator.ServiceImpls.DepartmentServiceImpl;
-import com.example.ficklecalculator.ServiceImpls.EmployeeServiceImpl;
 import com.example.ficklecalculator.Services.EmployeeService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.ficklecalculator.department.constants.DepartmentConstants.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -29,57 +30,46 @@ public class DepartmentsTest {
 
     @Test
     public void testGetEmployeeWithMaxSalary(){
-        Employee employee1 = new Employee("John", "Doe", 1, 1000f);
-        Employee employee2 = new Employee("Jane", "Doe", 1, 2000f);
-        List<Employee> employees = new ArrayList<>();
-        employees.add(employee1);
-        employees.add(employee2);
         Mockito.when(employeeService.allEmployees()).thenReturn(employees);
         Assertions.assertEquals(employee2, departmentService.getEmployeeWithMaxSalary(employee2.getDepartment()));
-        Assertions.assertThrows(EmployeeNotFoundException.class, () -> departmentService.getEmployeeWithMinSalary(2));
+        Assertions.assertThrows(EmployeeNotFoundException.class, () -> departmentService.getEmployeeWithMinSalary(6));
     }
 
     @Test
     public void testGetEmployeeWithMinSalary(){
-        Employee employee1 = new Employee("John", "Doe", 1, 1000f);
-        Employee employee2 = new Employee("Jane", "Doe", 1, 2000f);
-        List<Employee> employees = new ArrayList<>();
-        employees.add(employee1);
-        employees.add(employee2);
         Mockito.when(employeeService.allEmployees()).thenReturn(employees);
         Assertions.assertEquals(employee1, departmentService.getEmployeeWithMinSalary(employee1.getDepartment()));
-        Assertions.assertThrows(EmployeeNotFoundException.class, () -> departmentService.getEmployeeWithMinSalary(2));
+        Assertions.assertThrows(EmployeeNotFoundException.class, () -> departmentService.getEmployeeWithMinSalary(6));
     }
 
     @Test
     public void testGetAllEmployeesInDepartment(){
-        Employee employee1 = new Employee("John", "Doe", 1, 1000f);
-        Employee employee2 = new Employee("Jane", "Doe", 1, 2000f);
-        List<Employee> employees = new ArrayList<>();
-        employees.add(employee1);
-        employees.add(employee2);
         Mockito.when(employeeService.allEmployees()).thenReturn(employees);
-        Assertions.assertEquals(employees, departmentService.getAllEmployeesInDepartment(1));
-        List<Employee> employees2 = new ArrayList<>();
-        Assertions.assertEquals(employees2, departmentService.getAllEmployeesInDepartment(6));
+        List<Employee> employeesInDepartmentOne = employeeService.allEmployees().stream().filter(employee -> employee.getDepartment() == 1).toList();
+        Assertions.assertEquals(employeesInDepartmentOne, departmentService.getAllEmployeesInDepartment(1));
+        Assertions.assertEquals(new ArrayList<>(), departmentService.getAllEmployeesInDepartment(6));
     }
 
     @Test
     public void testGetAllEmployeesInEachDepartment(){
-
-        Employee employee1 = new Employee("John", "Doe", 1, 1000f);
-        Employee employee2 = new Employee("Jane", "Doe", 2, 2000f);
-        List<Employee> employees = new ArrayList<>();
-        employees.add(employee1);
-        employees.add(employee2);
-        List<Employee> employeesDepartmentOne = new ArrayList<>();
-        List<Employee> employeesDepartmentSecond = new ArrayList<>();
-        List<Employee> employeesDepartmentThird = new ArrayList<>();
-        List<Employee> employeesDepartmentFourth = new ArrayList<>();
-        List<Employee> employeesDepartmentFifth = new ArrayList<>();
-        employeesDepartmentOne.add(employee1);
-        employeesDepartmentSecond.add(employee2);
         Mockito.when(employeeService.allEmployees()).thenReturn(employees);
+
+        List<Employee> employeesDepartmentOne = employeeService.allEmployees().stream()
+                .filter(employee -> employee.getDepartment() == 1)
+                .toList();
+        List<Employee> employeesDepartmentSecond = employeeService.allEmployees().stream()
+                .filter(employee -> employee.getDepartment() == 2)
+                .toList();
+        List<Employee> employeesDepartmentThird = employeeService.allEmployees().stream()
+                .filter(employee -> employee.getDepartment() == 3)
+                .toList();
+        List<Employee> employeesDepartmentFourth = employeeService.allEmployees().stream()
+                .filter(employee -> employee.getDepartment() == 4)
+                .toList();
+        List<Employee> employeesDepartmentFifth = employeeService.allEmployees().stream()
+                .filter(employee -> employee.getDepartment() == 5)
+                .toList();
+
         List<List<Employee>> allEmployees = List.of(employeesDepartmentOne, employeesDepartmentSecond, employeesDepartmentThird, employeesDepartmentFourth, employeesDepartmentFifth);
         Assertions.assertEquals(allEmployees, departmentService.getAllEmployeesInDepartment());
     }
